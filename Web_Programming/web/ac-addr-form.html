@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/header.css">
+
+</head>
+<body>
+    
+    <div class="container-fuild">
+        <div class="row justify-content-md-center">
+            <div class="col-sm-3 col-md-6 col-lg-3">
+                <p><h2>SETTING</h2></p>
+                <div class="tab">
+                <p><h5>ACCOUNT</h5></p>
+                <hr width="50%" align="left">
+                <p><h5>ADDRESSES</h5></p></button>
+                <hr width="50%" align="left">
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-6 col-lg-6">
+                <form action="updateAc" id="acForm">
+                <p><h3>ACCOUNT SETTINGS</h3></p>
+                <div class="row">
+                    <div class="col-sm-3 col-md-6 col-lg-4">
+                        <p>First Name</p>
+                        <p><input type="text" name="fname"></p>
+                        <p>Password</p>
+                        <p><input type="password" name="pwd"</p>
+                        <p>Day of Birth</p>
+                        <p><input type="date" name="dob"></p>
+                    </div>
+                    <div class="col-sm-3 col-md-6 col-lg-4">
+                        <p>Last Name</p>
+                        <p><input type="text" name="lname"></p>
+                        <p>Email</p>
+                        <p><input type="text" name="email"></p>
+                    </div>
+                </div>
+                <p><button type="submit">Save</button></p>
+                </form>
+            </div>
+        </div>
+    
+    
+        <div class="container-fuild">
+        <div class="row justify-content-md-center">
+            <div class="col-sm-3 col-md-6 col-lg-3">
+            </div>
+            <div class="col-sm-3 col-md-6 col-lg-6">
+                <form action="updateAddr" id="addrForm">
+                <p><h3>MANAGE ADDRESSES</h3></p>
+                <p>Address</p>
+                <p><textarea name="addr" rows="2" cols="55"></textarea></p>
+                <div class="row">
+                    <div class="col-sm-3 col-md-6 col-lg-4">
+                        <p>City</p>
+                        <p><input type="text" name="city"></p>
+                        <p>Country</p>
+                        <p><input type="text" name="country"></p>
+                        <p>Phone Number</p>
+                        <p><input type="text" name="phone"></p>
+                        
+                    </div>
+                    <div class="col-sm-3 col-md-6 col-lg-4">
+                        <p>Postcode</p>
+                        <p><input type="text" name="pcode"></p>
+                        <p>Province</p>
+                        <p><input type="text" name="Province"></p>                 
+                    </div>
+                </div>
+                <p><button type="submit">Save</button></p>
+                </form>
+            </div>
+        </div>
+<script>
+
+</script>
+</body>
+</html>
