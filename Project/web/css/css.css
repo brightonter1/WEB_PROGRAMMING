@@ -1,0 +1,72 @@
+body{
+    font-family: "Courier New", Courier, Monaco;
+    background-image: url("../image/4.jpg");
+    background-size: 100%;
+
+}
+.navbar-nav{
+    width: 100%;
+    text-align: center;
+}
+.navbar-nav li{
+    float: none;
+    display: inline-block;
+}
+.display-1{
+    font-size:6rem;
+    font-weight:300;
+    line-height:1.2
+}
+
+.header{
+    background-color: #ff6347;
+}
+.center-pills { 
+    display: inline-block; 
+}
+.form-login{
+    width: 40%;
+    margin: 0 auto;
+    background-color: white;
+    padding:5% 10% 5% 10%;
+}
+.tab-content h3{
+    background-color: white;
+    margin:0 auto;
+    padding-top:3%;
+    width:40%;
+}
+
+.nav-pills li a{
+    background-color:white;
+    margin-top:50px;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.card{
+    background-color:white;
+    padding-top:1%;
+     word-wrap:break-word;
+    border:1px solid rgba(0,0,0,.125);
+    border-radius:.3rem
+}
+.card h4{
+    text-align:center;
+}
+.container h3{
+    text-align:center;
+    background-color:white;
+}
+#container{
+    background-color:white;
+    padding-bottom:2%;
+}
+#container button{
+    margin-left:25%;
+    width:50%;
+}
