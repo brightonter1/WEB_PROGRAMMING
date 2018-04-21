@@ -13,13 +13,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/css.css"/>
     </head>
+    <style>
+        .col-lg-4{
+            width:33.3%;
+            height:360px;
+        }
+    </style>
     <body>
-        
+
+        <%@include file="header.jsp" %>
         <div class="container-fluid">
             <nav class="navbar navbar-expand-sm">
                 <ul class="navbar-nav">
@@ -42,41 +45,29 @@
             </nav>
         </div>
 
+        <sql:query dataSource="shoppingonline" var="product">
+            SELECT * FROM product
+        </sql:query>
+
+
         <div class="container">
             <div class="row">
-                <div class="card p-3 col-12 col-md-6 col-lg-4">
-                    <div class="card-wrapper">
-                        <div class=card-img>
-                            <img src="image/supreme4.jpg" width="100%">
-                        </div>
-                        <div class="card-box">
-                            <p><h4>Hello</h4></p>
-                            <p>Morbi ultricies tincidunt odio ut efficitur. Fusce suscipit ultricies metus, eu hendrerit massa pharetra eu. Learn more...</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card p-3 col-12 col-md-6 col-lg-4">
-                    <div class="card-wrapper">
-                        <div class=card-img>
-                            <img src="image/supreme4.jpg" width="100%">
-                        </div>
-                        <div class="card-box">
-                            <p><h4>Hello</h4></p>
-                            <p>Morbi ultricies tincidunt odio ut efficitur. Fusce suscipit ultricies metus, eu hendrerit massa pharetra eu. Learn more...</p>
+                <c:forEach items="${product.rows}" var="i">
+                    <div class="card col-sm-6 col-md-4 col-lg-4">
+                        <div class="card-wrapper">
+                            <div class=card-img>
+                                <img src="${i.image}" width="100%">
+                            </div>
+                            <div class="card-box">
+                                <p><h4>${i.title}</h4></p>
+                                <p>${i.description}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="card p-3 col-12 col-md-6 col-lg-4">
-                    <div class="card-wrapper">
-                        <div class=card-img>
-                            <img src="image/supreme4.jpg" width="100%">
-                        </div>
-                        <div class="card-box">
-                            <p><h4>Hello</h4></p>
-                            <p>Morbi ultricies tincidunt odio ut efficitur. Fusce suscipit ultricies metus, eu hendrerit massa pharetra eu. Learn more...</p>
-                        </div>
-                    </div>
-                </div>
-                </body>
-                </html>
+                </c:forEach>       
+            </div>
+        </div>
+
+
+    </body>
+</html>

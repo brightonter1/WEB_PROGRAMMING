@@ -53,7 +53,7 @@ body{
     padding-top:1%;
      word-wrap:break-word;
     border:1px solid rgba(0,0,0,.125);
-    border-radius:.3rem
+    border-radius:.5rem
 }
 .card h4{
     text-align:center;
@@ -69,4 +69,8 @@ body{
 #container button{
     margin-left:25%;
     width:50%;
+}
+.col-lg-4{
+    width:33.3%;
+    height:360px;
 }

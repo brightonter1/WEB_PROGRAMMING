@@ -44,11 +44,11 @@
                         var message = '<c:out value="${sessionScope.username}"/>';
                 </script>
                 
-                 <sql:query dataSource="project" var="account">
+                 <sql:query dataSource="shoppingonline" var="member">
                     SELECT * FROM member WHERE username = '${sessionScope.username}'
                 </sql:query>
 
-                <c:forEach items="${account.rows}" var="i">
+                <c:forEach items="${member.rows}" var="i">
                     <c:set var="username" value="${i.username}"/>
                 </c:forEach>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -77,6 +77,7 @@
             </div>
         </nav>
 
+                                
         <script>
             window.onscroll = function () {
                 myFunction()

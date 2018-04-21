@@ -4,11 +4,35 @@
         <description>ServletContextListener</description>
         <listener-class>Controller.init</listener-class>
     </listener>
+    <servlet>
+        <servlet-name>action</servlet-name>
+        <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+        <init-param>
+            <param-name>config</param-name>
+            <param-value>/WEB-INF/struts-config.xml</param-value>
+        </init-param>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>2</param-value>
+        </init-param>
+        <init-param>
+            <param-name>detail</param-name>
+            <param-value>2</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>action</servlet-name>
+        <url-pattern>*.do</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
     <resource-ref>
         <description>jdbc:mysql://localhost:3307/mysql?zeroDateTimeBehavior=convertToNull</description>
         <res-ref-name>db</res-ref-name>
@@ -23,4 +47,18 @@
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>
+    <resource-ref>
+        <description>jdbc:mysql://localhost:3307/shoppingonline?zeroDateTimeBehavior=convertToNull</description>
+        <res-ref-name>shoppingonline</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>
+    <context-param>
+        <description>Location to store uploaded file</description>
+        <param-name>file-upload</param-name>
+        <param-value>
+            C:\Users\Brightonter\Documents\WEB_PROGRAMMING\Project\web\image\
+        </param-value>
+    </context-param>
 </web-app>

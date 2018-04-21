@@ -48,7 +48,7 @@
                 </div>
 
                 <c:if test="${param.btn == 'login'}">
-                    <sql:query dataSource="project" var="user">
+                    <sql:query dataSource="shoppingonline" var="user">
                         SELECT * FROM user
                     </sql:query>
 
@@ -98,7 +98,7 @@
                 </div>
                             <c:if test="${param.regis == 'regis'}">
                                 <c:set var="state" value="0"/>
-                                <sql:query dataSource="project" var="member">
+                                <sql:query dataSource="shoppingonline" var="member">
                                     SELECT * FROM member
                                 </sql:query>
                                 <c:forEach items="${member.rows}" var="i">
@@ -107,11 +107,11 @@
                                     </c:if>
                                 </c:forEach>
                                 <c:if test="${state == '0'}">
-                                    <sql:update dataSource="project">
+                                    <sql:update dataSource="shoppingonline">
                                         INSERT INTO member (username, email)
                                         VALUES ('${param.user}', '${param.email}');
                                     </sql:update>
-                                    <sql:update dataSource="project">
+                                    <sql:update dataSource="shoppingonline">
                                         INSERT INTO user 
                                         VALUES ('${param.user}', '${param.pwd}', 'member');
                                     </sql:update>

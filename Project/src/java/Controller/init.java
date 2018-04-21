@@ -27,7 +27,7 @@ public class init implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         try {
-            conn = getProject().getConnection();
+            conn = getShoppingonline().getConnection();
             sce.getServletContext().setAttribute("Connection", conn);
         } catch (NamingException ex) {
             Logger.getLogger(init.class.getName()).log(Level.SEVERE, null, ex);
@@ -45,9 +45,9 @@ public class init implements ServletContextListener {
         }
     }
 
-    private DataSource getProject() throws NamingException {
+    private DataSource getShoppingonline() throws NamingException {
         Context c = new InitialContext();
-        return (DataSource) c.lookup("java:comp/env/project");
+        return (DataSource) c.lookup("java:comp/env/shoppingonline");
     }
 
 
