@@ -19,8 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Manage_Address;
-import model.Member;
+import model.MemberAddress;
 
 /**
  *
@@ -50,37 +49,35 @@ public class SetServlet extends HttpServlet {
             Connection conn = (Connection) context.getAttribute("Connection");
             HttpSession session = request.getSession();
             
-            Manage_Address m = new Manage_Address();
+            MemberAddress m = new MemberAddress();
             m.setAll(
                     request.getParameter("address"),
                     request.getParameter("city"),
                     request.getParameter("code"),
-                    request.getParameter("country")
-            );
-            Member m1 = new Member();
-            m1.setAll(
-                    request.getParameter("dob"),
+                    request.getParameter("country"),
                     request.getParameter("fname"),
                     request.getParameter("lname"),
-                    request.getParameter("email"),
                     request.getParameter("mobile")
             );
-            
-            PreparedStatement apply = conn.prepareStatement(
-                    "UPDATE member_address JOIN member USING(username) SET address = ?, dob = ?, first_name = ?, last_name = ?, email = ?, mobile = ?, country = ?, city = ?, postcode = ? WHERE username = ?"
-            );
 
-            apply.setString(1, m.getAddress());
-            apply.setString(2, m1.getDob());
-            apply.setString(3, m1.getFirst_name());
-            apply.setString(4, m1.getLast_name());
-            apply.setString(5, m1.getEmail());
-            apply.setString(6, m1.getMobile());
-            apply.setString(7, m.getCountry());
-            apply.setString(8, m.getCity());
-            apply.setString(9, m.getPostcode());
-            apply.setString(10, (String) session.getAttribute("username"));
-            apply.execute();
+            PreparedStatement apply = conn.prepareStatement(
+                    "UPDATE member_address SET addr_fname = ?, addr_lname = ?, addr_mobile = ?, address = ?, country = ?, city = ?, postcode = ?"
+                            + " WHERE username = ? AND id_address = ?"
+            );
+            out.println("HelloWorld");
+            out.println(session.getAttribute("id_addr"));
+            apply.setString(1, m.getFname());
+            apply.setString(2, m.getLname());
+            apply.setString(3, m.getMobile());
+            apply.setString(4, m.getAddress());
+            apply.setString(5, m.getCountry());
+            apply.setString(6, m.getCity());
+            apply.setString(7, m.getPostcode());
+            apply.setString(8, (String) session.getAttribute("username"));
+            apply.setString(9, request.getParameter("apply"));
+            apply.executeUpdate();
+
+            
 
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Apply Complete!!!');");

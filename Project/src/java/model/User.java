@@ -9,20 +9,20 @@ package model;
  *
  * @author Brightonter
  */
-public class Member {
+public class User implements java.io.Serializable{
     private String username;
     private String dob;
-    private String first_name;
-    private String last_name;
+    private String fname;
+    private String lname;
     private String email;
     private String mobile;
 
-    public Member(){}
+    public User(){}
     
     public void setAll(String dob, String first_name, String last_name, String email, String mobile){
         this.dob = dob;
-        this.first_name = first_name;
-        this.last_name = last_name;
+        this.fname = first_name;
+        this.lname = last_name;
         this.email = email;
         this.mobile = mobile;
     }
@@ -42,20 +42,20 @@ public class Member {
         this.dob = dob;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getfname() {
+        return fname;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setfname(String first_name) {
+        this.fname = first_name;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getlname() {
+        return lname;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setlame(String last_name) {
+        this.lname = last_name;
     }
 
     public String getEmail() {

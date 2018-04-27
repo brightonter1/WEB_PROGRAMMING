@@ -36,7 +36,7 @@ public class logoutServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             HttpSession sn = request.getSession();
             sn.invalidate();
-            response.sendRedirect("header.jsp");
+            response.sendRedirect("home.jsp");
         }
     }
 

@@ -22,6 +22,7 @@
 
     </style>
     <body>
+
         <div class="container" style="text-align: center;">
             <ul class="nav nav-pills center-pills">
                 <li class="active"><a data-toggle="pill" href="#login">LOGIN</a></li>
@@ -54,10 +55,13 @@
 
                     <c:forEach var="i" items="${user.rows}">
                         <c:if test="${param.user == i.username && param.pwd == i.password}">
+                            <c:set var="type" value="${i.type}" scope="session"/>
                             <%
                                 HttpSession sn = request.getSession();
                                 sn.setAttribute("username", request.getParameter("user"));
-                                response.sendRedirect("header.jsp");
+//                                RequestDispatcher obj = request.getRequestDispatcher("home.jsp");
+//                                obj.forward(request, response);
+                                response.sendRedirect("home.jsp");
                             %>
                             <%--<jsp:forward page="TEMPLATE/header.jsp"/>--%>
                         </c:if>
@@ -89,35 +93,72 @@
                             </div>
 
                             <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" class="form-control" name="fname" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" class="form-control" name="lname" required>
+                            </div>
+
+                            <div class="form-group">
                                 <label>Email</label>
                                 <input type="email" class="form-control" name="email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Mobile</label>
+                                <input type="text" class="form-control" name="mobile" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Date of Birth</label><br>
+                                <select name="year">
+                                    <c:forEach var="year" begin="1918" end="2018" >
+                                        <option value="${year}">${year}</option>
+                                    </c:forEach>
+                                </select>
+                                / <select name="month">
+                                    <c:forEach var="month" begin="1" end="12" >
+                                        <option value="${month}">${month}</option>
+                                    </c:forEach>
+                                </select>
+
+                                / <select name="day">
+                                    <c:forEach var="day" begin="01" end="31">
+                                        <option value="${day}">${day}</option>
+                                    </c:forEach>
+
+                                </select>
                             </div>
                             <button type="submit" class="btn btn-default" name="regis" value="regis">Singup</button>
                         </form>
                     </div>
                 </div>
-                            <c:if test="${param.regis == 'regis'}">
-                                <c:set var="state" value="0"/>
-                                <sql:query dataSource="shoppingonline" var="member">
-                                    SELECT * FROM member
-                                </sql:query>
-                                <c:forEach items="${member.rows}" var="i">
-                                    <c:if test="${i.username == param.user && i.email == param.email}">
-                                        <c:set var="state" value="1"/>
-                                    </c:if>
-                                </c:forEach>
-                                <c:if test="${state == '0'}">
-                                    <sql:update dataSource="shoppingonline">
-                                        INSERT INTO member (username, email)
-                                        VALUES ('${param.user}', '${param.email}');
-                                    </sql:update>
-                                    <sql:update dataSource="shoppingonline">
-                                        INSERT INTO user 
-                                        VALUES ('${param.user}', '${param.pwd}', 'member');
-                                    </sql:update>
-                                    Register Complete
-                                </c:if>
-                            </c:if>
+                <c:if test="${param.regis == 'regis'}">
+                    <c:set var="state" value="0"/>
+                    <sql:query dataSource="shoppingonline" var="member">
+                        SELECT * FROM user
+                    </sql:query>
+                    <c:forEach items="${member.rows}" var="i">
+                        <c:if test="${i.username == param.user}">
+                            <c:set var="state" value="1"/>
+                        </c:if>
+                    </c:forEach>
+                    <c:if test="${state == '0'}">
+                        <sql:update dataSource="shoppingonline">
+                            INSERT INTO user 
+                            VALUES ('${param.user}', '${param.pwd}', 'member');
+                        </sql:update>
+                        <sql:update dataSource="shoppingonline">
+                            INSERT INTO member 
+                            VALUES ('${param.user}', '${param.year}-${param.month}-${param.day}', '${param.fname}', '${param.lname}', '${param.email}', '${param.mobile}');
+                        </sql:update>
+
+                        Register Complete
+                    </c:if>
+                </c:if>
             </div>
         </div>
 

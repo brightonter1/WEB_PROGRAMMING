@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/test">
+  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="db" password="Can_Noey_93" type="javax.sql.DataSource" url="jdbc:mysql://tomcat.it.kmitl.ac.th:3306/webpro_31_dev?zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true" username="webpro-31"/>
+</Context>

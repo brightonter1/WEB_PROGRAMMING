@@ -5,6 +5,8 @@
  */
 package Controller;
 
+
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -15,7 +17,6 @@ import javax.naming.NamingException;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.sql.DataSource;
-
 /**
  * Web application lifecycle listener.
  *
@@ -27,7 +28,7 @@ public class init implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         try {
-            conn = getShoppingonline().getConnection();
+            conn = (Connection) getShoppingonline().getConnection();
             sce.getServletContext().setAttribute("Connection", conn);
         } catch (NamingException ex) {
             Logger.getLogger(init.class.getName()).log(Level.SEVERE, null, ex);
@@ -49,6 +50,9 @@ public class init implements ServletContextListener {
         Context c = new InitialContext();
         return (DataSource) c.lookup("java:comp/env/shoppingonline");
     }
+
+
+
 
 
 }
