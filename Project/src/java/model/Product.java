@@ -9,51 +9,133 @@ package model;
  *
  * @author Brightonter
  */
-public class Product {
-    private int product_id;
-    private String product_title;
-    private String product_description;
-    private String product_image;
-    private String type;
+public class Product implements java.io.Serializable{
+    private int p_id;
+    private int product_color_id;
+    private int pso_id;
+    private String title;
+    private String description;
+    private String cate_type;
+    private String sex;
+    private String color;
+    private String image;
+    private int quantity;
+    private String size;
+    private float price;
 
-    public Product(){}
-    public int getProduct_id() {
-        return product_id;
+    public Product() {
     }
 
-    public void setProduct_id(int product_id) {
-        this.product_id = product_id;
+    public Product(int p_id, int product_color_id, int pso_id, String title, String description, String cate_type, String sex, String color, String image, int quantity, String size, float price) {
+        this.p_id = p_id;
+        this.product_color_id = product_color_id;
+        this.pso_id = pso_id;
+        this.title = title;
+        this.description = description;
+        this.cate_type = cate_type;
+        this.sex = sex;
+        this.color = color;
+        this.image = image;
+        this.quantity = quantity;
+        this.size = size;
+        this.price = price;
+    }
+    
+    
+
+    public int getP_id() {
+        return p_id;
     }
 
-    public String getProduct_title() {
-        return product_title;
+    public void setP_id(int p_id) {
+        this.p_id = p_id;
     }
 
-    public void setProduct_title(String product_title) {
-        this.product_title = product_title;
+    public int getProduct_color_id() {
+        return product_color_id;
     }
 
-    public String getProduct_description() {
-        return product_description;
+    public void setProduct_color_id(int product_color_id) {
+        this.product_color_id = product_color_id;
     }
 
-    public void setProduct_description(String product_description) {
-        this.product_description = product_description;
+    public int getPso_id() {
+        return pso_id;
     }
 
-    public String getProduct_image() {
-        return product_image;
+    public void setPso_id(int pso_id) {
+        this.pso_id = pso_id;
     }
 
-    public void setProduct_image(String product_image) {
-        this.product_image = product_image;
+    public String getTitle() {
+        return title;
     }
 
-    public String getType() {
-        return type;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCate_type() {
+        return cate_type;
+    }
+
+    public void setCate_type(String cate_type) {
+        this.cate_type = cate_type;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 }

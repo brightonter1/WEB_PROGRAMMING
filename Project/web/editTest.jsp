@@ -3,7 +3,7 @@
     Created on : Apr 26, 2018, 1:19:45 AM
     Author     : Brightonter
 --%>
-
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -24,8 +24,8 @@
                                     <label class="control-label col-sm-5">Product No :</label>
                                     <input type="text" class="form-control" id="p_idShow" disabled="">
                                 </div>
-                                
-                                
+
+
                                 <div class="col-sm-10"> 
                                     <label class="control-label col-sm-2">Title</label>
                                     <input type="text" class="form-control" name="title" id="title" >
@@ -34,7 +34,7 @@
                                 </div>
 
                                 <div class="col-sm-10"> 
-                                    <label class="control-label col-sm-2">Category</label><br>
+                                    <label class="control-label col-sm-2">Category ${category.rows}</label><br>
                                     <select name="cate_type" id="cate" class="form-control">
                                         <c:forEach var="e_category" items="${category.rows}">
                                             <option value="${e_category.cate_type}">${e_category.cate_type}</option>
@@ -43,10 +43,23 @@
                                 </div>
 
                                 <div class="col-sm-10">   
+                                    <label class="control-label col-sm-2">GENDER</label><br>
+                                    <sql:query var="gender" dataSource="shoppingonline">
+                                        select * from sex
+                                    </sql:query>
+                                    <select name="sex" id="sex" class="form-control">
+                                        <c:forEach var="e_gender" items="${gender.rows}">
+                                            <option value="${e_gender.sex}">${e_gender.sex}</option>
+                                        </c:forEach>
+
+                                    </select> 
+                                </div>        
+
+                                <div class="col-sm-10">   
                                     <label class="control-label col-sm-2" >Description</label>
                                     <textarea class="form-control" name="description" id="desc"></textarea>
                                 </div>
-                                
+
                                 <div class="col-sm-10">   
                                     <label class="control-label col-sm-2" >Color</label>
                                     <input type="text" class="form-control" name="color" id="color" >
@@ -54,10 +67,10 @@
 
                                 <div class="col-sm-10">
                                     <br><label class="control-label col-sm-2">image</label>
-                                    
+
                                     <img src="" width="300px" id="url">
                                     <input type="file" name="file">
-                                    
+
                                 </div>
 
                                 <div class="col-sm-10">
@@ -71,6 +84,6 @@
                 </div>
             </div>
         </div>
-                                        
+
     </body>
 </html>

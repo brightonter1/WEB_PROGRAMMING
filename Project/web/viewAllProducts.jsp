@@ -22,7 +22,7 @@
 
         </sql:query>
 
-        <div class="container">
+        <div class="container-fuild">
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addProduct">Add Product</button>
             <br><br>
             <table border="1" class="table table-striped">
@@ -65,7 +65,7 @@
                                 </c:if>
                                 <c:if test="${i.image == null}">
                                 <td>NO image</td>
-                                </c:if>
+                            </c:if>
 
                             <td>${i.cate_type}</td>
                             <td>${i.sex}</td>                   
@@ -80,20 +80,30 @@
                             <td class="data" data-p_id="${i.p_id}"  data-p_idShow="${i.p_id}" 
                                 data-title="${i.title}" data-des="${i.description}"
                                 data-cate="${i.cate_type}" data-color="${i.color}"
-                                data-url="${i.image}" data-product_color_id="${i.product_color_id}"><button type="submit" class="btn btn-success" name="edit" value="${i.p_id}" data-toggle="modal" data-target="#editProduct">Edit</button></td>
+                                data-url="${i.image}" data-sex="${i.sex}" data-product_color_id="${i.product_color_id}"><button type="submit" class="btn btn-success" name="edit" value="${i.p_id}" data-toggle="modal" data-target="#editProduct">Edit</button></td>
                             <!--</form>-->
-                    <form action="editPso.jsp">
-                        <input type="text" name="p_id" value="${i.p_id}" style="display:none;">
-                        <input type="text" name="pso_id" value="${i.pso_id}" style="display:none;">
-                        <input type="text" name="product_color_id" value="${i.product_color_id}" style="display:none;">
-                        <td><button  type="submit" class="btn btn-success" data-toggle="modal" data-target="#addPso">Edit Pso</button></td>
-                    </form>
+
+
+
+                            <!--<form action="editPso.jsp">-->
+                    <input type="text" id="editp_id" name="p_id" value="${i.p_id}" style="display:none;">
+                    <input type="text" id="editpso_id" name="pso_id" value="${i.pso_id}" style="display:none;">
+                    <input type="text" id="editproduct_color_id" name="product_color_id" value="${i.product_color_id}" style="display:none;">
+                    <td class="edit" data-p_id="${i.p_id}"  data-pso_id="${i.pso_id}" data-product_color_id="${i.product_color_id}"><button type="submit" class="btn btn-success" >Edit Pso</button></td>
+                    <!--</form-->
+                    <div id="test"></div>
+
+
+
+
+
                     <form action="addPso.jsp">
                         <input type="text" name="p_id" value="${i.p_id}" style="display:none;">
-                        
+
                         <input type="text" name="product_color_id" value="${i.product_color_id}" style="display:none;">
-                        <td><button  type="submit" class="btn btn-success" data-toggle="modal" data-target="#addPso">Add Pso</button></td>
+                        <td class="addPso" data-p_id="${i.p_id}" data-product_color_id="${i.product_color_id}"><button  type="submit" class="btn btn-success" data-toggle="modal" data-target="#addPso">Add Pso</button></td>
                     </form>
+
 
                     <form action="addColor.jsp">
                         <input type="text" name="p_id" value="${i.p_id}" style="display:none;">
@@ -122,49 +132,71 @@
 
         <script>
 
-            $('.data').click(function () {
-                var p_id = $(this).attr('data-p_id');
-                var p_idShow = $(this).attr('data-p_idShow');
-//                var pso = $(this).attr('data-pso');
-                var title = $(this).attr('data-title');
-                var desc = $(this).attr('data-des');
-                var image = $(this).attr('data-url');
-                var cate = $(this).attr('data-cate');
-//                var qty = $(this).attr('data-qty');
-//                var size = $(this).attr('data-size');
-                var color = $(this).attr('data-color');
-                var url = $(this).attr('data-url');
-                var product_color_id = $(this).attr('data-product_color_id');
-//                var price = $(this).attr('data-price');
-//                console.log(p_id);
-//                console.log(pso);
-//                console.log(title);
-//                console.log(desc);
-//                console.log(image);
-//                console.log(cate);
-//                console.log(qty);
-//                console.log(size);
-//                console.log(color);
-//                console.log(price);
-                $("#product_color_id").val(product_color_id);
-                $("#p_id").val(p_id);
-                $("#p_id1").val(p_id);
-                $("#p_idShow").val(p_idShow);
-//                $("#pso").val(pso);
-                $("#title").val(title);
-                $("#desc").val(desc);
-//                $("#image").val(image);
-                $("#cate").val(cate);
-//                $("#qty").val(qty);
-//                $("#size").val(size);
-                $("#color").val(color);
-//                $("#price").val(price);
-                document.getElementById("url").src = image;
-                document.getElementById("urlpso").src = image;
+            $(document).ready(function () {
+                $('.edit').click(function () {
+                    var p_id = $(this).attr('data-p_id');
+                    var pso_id = $(this).attr('data-pso_id');
+                    var product_color_id = $(this).attr('data-product_color_id');
+                    x = 1;
+                    console.log(p_id);
+                    console.log(pso_id);
+                    console.log(product_color_id);
+
+                    $.post("AjaxEditPso.jsp", {p_id: p_id, pso_id: pso_id, product_color_id: product_color_id}, function (data) {
+                        $('#test').html(data);
+                    });
+                });
+            });
+
+            $(document).ready(function () {
+                $('.addPso').click(function () {
+                    var p_id = $(this).attr('data-p_id');
+                    var product_color_id = $(this).attr('data-product_color_id');
+                    console.log(p_id);
+                    console.log(product_color_id);
+
+                    $.post("editprotest.jsp", {p_id: p_id, pso_id: product_color_id}, function (data) {
+                        $('#test').html(data);
+                    });
+                });
+            });
+
+            $(document).ready(function () {
+                $('.data').click(function () {
+                    var p_id = $(this).attr('data-p_id');
+                    var p_idShow = $(this).attr('data-p_idShow');
+                    var title = $(this).attr('data-title');
+                    var desc = $(this).attr('data-des');
+                    var image = $(this).attr('data-url');
+                    var cate = $(this).attr('data-cate');
+                    var color = $(this).attr('data-color');
+                    var url = $(this).attr('data-url');
+                    var product_color_id = $(this).attr('data-product_color_id');
+
+                    console.log(p_id);
+                    console.log(product_color_id);
+                    console.log(title);
+                    console.log(color);
+                    console.log(desc);
+                    console.log(image);
+                    console.log(cate);
+
+                    $("#product_color_id").val(product_color_id);
+                    $("#p_id").val(p_id);
+                    $("#p_id1").val(p_id);
+                    $("#p_idShow").val(p_idShow);
+                    $("#title").val(title);
+                    $("#desc").val(desc);
+                    $("#cate").val(cate);
+
+                    $("#color").val(color);
+
+                    document.getElementById("url").src = image;
+                });
+            });
 
 
-            }
-            );
+
 
 
 

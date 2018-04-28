@@ -11,21 +11,20 @@ package model;
  */
 public class User implements java.io.Serializable{
     private String username;
-    private String dob;
-    private String fname;
-    private String lname;
-    private String email;
-    private String mobile;
+    private String password;
+    private String type;
 
-    public User(){}
-    
-    public void setAll(String dob, String first_name, String last_name, String email, String mobile){
-        this.dob = dob;
-        this.fname = first_name;
-        this.lname = last_name;
-        this.email = email;
-        this.mobile = mobile;
+    public User() {
     }
+
+    public User(String username, String password, String type) {
+        this.username = username;
+        this.password = password;
+        this.type = type;
+    }
+    
+    
+
     public String getUsername() {
         return username;
     }
@@ -34,44 +33,23 @@ public class User implements java.io.Serializable{
         this.username = username;
     }
 
-    public String getDob() {
-        return dob;
+    public String getPassword() {
+        return password;
     }
 
-    public void setDob(String dob) {
-        this.dob = dob;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getfname() {
-        return fname;
+    public String getType() {
+        return type;
     }
 
-    public void setfname(String first_name) {
-        this.fname = first_name;
+    public void setType(String type) {
+        this.type = type;
     }
-
-    public String getlname() {
-        return lname;
-    }
-
-    public void setlame(String last_name) {
-        this.lname = last_name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
+    
+    
+    
     
 }

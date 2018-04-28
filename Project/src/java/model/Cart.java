@@ -5,31 +5,56 @@
  */
 package model;
 
+import java.sql.Date;
+
 /**
  *
  * @author Brightonter
  */
 public class Cart {
-    private int card_id;
-    private String order_date;
+    
+    private int cart_id;
+    private String member_user_username;
+    private Date order_date;
     private float total_price;
-    private String transport_status;
     private String payment_status;
+    private String transport_status;
 
-    public Cart(){}
-    public int getCard_id() {
-        return card_id;
+    public Cart() {
     }
 
-    public void setCard_id(int card_id) {
-        this.card_id = card_id;
+    public Cart(int cart_id, String member_user_username, Date order_date, float total_price, String payment_status, String transport_status) {
+        this.cart_id = cart_id;
+        this.member_user_username = member_user_username;
+        this.order_date = order_date;
+        this.total_price = total_price;
+        this.payment_status = payment_status;
+        this.transport_status = transport_status;
+    }
+    
+    
+
+    public int getCart_id() {
+        return cart_id;
     }
 
-    public String getOrder_date() {
+    public void setCart_id(int cart_id) {
+        this.cart_id = cart_id;
+    }
+
+    public String getMember_user_username() {
+        return member_user_username;
+    }
+
+    public void setMember_user_username(String member_user_username) {
+        this.member_user_username = member_user_username;
+    }
+
+    public Date getOrder_date() {
         return order_date;
     }
 
-    public void setOrder_date(String order_date) {
+    public void setOrder_date(Date order_date) {
         this.order_date = order_date;
     }
 
@@ -41,14 +66,6 @@ public class Cart {
         this.total_price = total_price;
     }
 
-    public String getTransport_status() {
-        return transport_status;
-    }
-
-    public void setTransport_status(String transport_status) {
-        this.transport_status = transport_status;
-    }
-
     public String getPayment_status() {
         return payment_status;
     }
@@ -56,4 +73,14 @@ public class Cart {
     public void setPayment_status(String payment_status) {
         this.payment_status = payment_status;
     }
+
+    public String getTransport_status() {
+        return transport_status;
+    }
+
+    public void setTransport_status(String transport_status) {
+        this.transport_status = transport_status;
+    }
+    
+    
 }

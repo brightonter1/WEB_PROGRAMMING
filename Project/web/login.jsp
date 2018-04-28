@@ -4,6 +4,7 @@
     Author     : Brightonter
 --%>
 
+<%@page import="model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -56,9 +57,11 @@
                     <c:forEach var="i" items="${user.rows}">
                         <c:if test="${param.user == i.username && param.pwd == i.password}">
                             <c:set var="type" value="${i.type}" scope="session"/>
-                            <%
+                            <%  
+                                User u = new User(request.getParameter("user"), request.getParameter("pwd"), "member");
                                 HttpSession sn = request.getSession();
-                                sn.setAttribute("username", request.getParameter("user"));
+                                sn.setAttribute("username", u.getUsername());
+                                sn.setAttribute("user", u);
 //                                RequestDispatcher obj = request.getRequestDispatcher("home.jsp");
 //                                obj.forward(request, response);
                                 response.sendRedirect("home.jsp");

@@ -206,13 +206,14 @@
         }else if (!button.equals("add") && withOutImage == false) {
             out.print("edit with image");
             String SQL = "UPDATE product "
-                    + "SET title = ?, description = ?, cate_type = ?"
+                    + "SET title = ?, description = ?, cate_type = ? sex = ? "
                     + "WHERE p_id = ?";
-            ppstm = con.prepareStatement(SQL);
+            ppstm = con.prepareStatement(SQL); 
             ppstm.setString(1, title);
             ppstm.setString(2, description);
             ppstm.setString(3, cate_type);
-            ppstm.setString(4, button);
+            ppstm.setString(4, sex);
+            ppstm.setString(5, button);
             ppstm.executeUpdate();
             out.print(" : half");
             SQL = "UPDATE product_color "
@@ -238,7 +239,7 @@
             ppstm.setString(1, title);
             ppstm.setString(2, description);
             ppstm.setString(3, cate_type);
-            ppstm.setString(4, "MEN");
+            ppstm.setString(4, sex);
             ppstm.setInt(5, p_id);
             ppstm.executeUpdate();
             out.println("kuy |||<br>" + button.isEmpty());

@@ -3,6 +3,7 @@
     Created on : Apr 27, 2018, 3:04:06 PM
     Author     : Brightonter
 --%>
+<%@include file="header.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,71 +12,58 @@
         <title>Add Cart</title>
     </head>
     <body>
-        
-        
-        <div class="modal fade" id="addCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
+        <jsp:useBean id="selectedProduct" scope="session" class="model.Product" />
 
-                    <div class="modal-body">
-                        <form action = "UploadServlet.jsp" method = "post">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="p_id" disabled="">
-                                <input type="text" class="form-control" id="size" disabled="">
-<!--                                <div class="col-sm-10"> 
-                                    <label class="control-label col-sm-5">Product No :</label>
-                                    <input type="text" class="form-control" id="p_idShow" disabled="">
-                                </div>
-                                
-                                
-                                <div class="col-sm-10"> 
-                                    <label class="control-label col-sm-2">Title</label>
-                                    <input type="text" class="form-control" name="title" id="title" >
-                                    <input type="text" class="form-control" name="p_id" id="p_id" style="display:none;">
-                                    <input type="text" class="form-control" name="product_color_id" id="product_color_id" style="display:none;">
-                                </div>
+        <sql:query var="findProduct" dataSource="shoppingonline">
+            select * 
+            from product
+            join product_color
+            using (p_id)
+            join pso
+            using (p_id, product_color_id)
+            where p_id = '${selectedProduct.p_id}'
+            and product_color_id = '${selectedProduct.product_color_id}'
+            and size = '${selectedProduct.size}'
+        </sql:query>
+        <c:forEach var="e_selectedProduct" items="${findProduct.rows}">
+            <c:set var="pso_id" value="${e_selectedProduct.pso_id}"></c:set>
+            <jsp:setProperty name="selectedProduct" property="title" value="${e_selectedProduct.title}" ></jsp:setProperty>
+            <jsp:setProperty name="selectedProduct" property="price" value="${e_selectedProduct.price}" ></jsp:setProperty>
+            <jsp:setProperty name="selectedProduct" property="pso_id" value="${e_selectedProduct.pso_id}" ></jsp:setProperty>
+            <jsp:setProperty name="selectedProduct" property="image" value="${e_selectedProduct.image}" ></jsp:setProperty>
+            <jsp:setProperty name="selectedProduct" property="color" value="${e_selectedProduct.color}" ></jsp:setProperty>
+            <jsp:setProperty name="selectedProduct" property="cate_type" value="${e_selectedProduct.cate_type}" ></jsp:setProperty>
+            <jsp:setProperty name="selectedProduct" property="description" value="${e_selectedProduct.description}" ></jsp:setProperty>
+            <jsp:setProperty name="selectedProduct" property="sex" value="${e_selectedProduct.sex}" ></jsp:setProperty>
 
-                                <div class="col-sm-10"> 
-                                    <label class="control-label col-sm-2">Category</label><br>
-                                    <select name="cate_type" id="cate" class="form-control">
-                                        <c:forEach var="e_category" items="${category.rows}">
-                                            <option value="${e_category.cate_type}">${e_category.cate_type}</option>
-                                        </c:forEach>
-                                    </select>  
-                                </div>
+                P_id : ${selectedProduct.p_id}<br>
+            color id : ${selectedProduct.product_color_id}<br>
+            pso id : ${pso_id}<br>
+            Image : <img src="${e_selectedProduct.image}"><br>
+            color : ${e_selectedProduct.color}<br>
+            <form action="addProductToCart" method="POST">
+                Quantity : 
 
-                                <div class="col-sm-10">   
-                                    <label class="control-label col-sm-2" >Description</label>
-                                    <textarea class="form-control" name="description" id="desc"></textarea>
-                                </div>
-                                
-                                <div class="col-sm-10">   
-                                    <label class="control-label col-sm-2" >Color</label>
-                                    <input type="text" class="form-control" name="color" id="color" >
-                                </div>
 
-                                <div class="col-sm-10">
-                                    <br><label class="control-label col-sm-2">image</label>
-                                    
-                                    <img src="" width="300px" id="url">
-                                    <input type="file" name="file">
-                                    
-                                </div>
 
-                                <div class="col-sm-10">
-                                    <br><button type="submit" class="btn btn-success" name="delete" value="delete">Edit</button>
-                                </div>-->
-                            </div> 
-                            kuy
-                        </form>
+                <select name="quantity" required>
+                    <c:if test="${e_selectedProduct.quantity != 0}">
+                        <c:forEach var="i" begin="1" end="${e_selectedProduct.quantity}">
+                            <option value="${i}">${i}</option>
+                        </c:forEach>
+                    </c:if>
+                    <c:if test="${e_selectedProduct.quantity == 0}">
+                        <option value="0">0</option>
+                    </c:if>
 
-                    </div>
+                </select>
+            </c:forEach>
+            <br>
+            <input type="submit" value="Confirm" /><br>
+        </form>
+        ${user.username}
 
-                </div>
-            </div>
-        </div>
-        
-        
-        
+
+
     </body>
 </html>

@@ -18,7 +18,7 @@ body{
 }
 
 .header{
-    background-color: #ff6347;
+    background-color: white;
 }
 .center-pills { 
     display: inline-block; 
@@ -47,64 +47,64 @@ body{
     width: 100%;
     }*/
 
-    .card{
-        background-color:white;
-        padding-top:1%;
-        word-wrap:break-word;
-        border:1px solid rgba(0,0,0,.125);
-        border-radius:.5rem
-    }
-    .card h4{
-        text-align:center;
-    }
-    .container h3{
-        text-align:center;
-        background-color:white;
-    }
-    #container{
-        background-color:white;
-        padding-bottom:2%;
-    }
-    #container button{
-        margin-left:25%;
-        width:50%;
-    }
-    .col-lg-4{
-        width:33.3%;
-        height:360px;
-    }
+.card{
+    background-color:white;
+    padding-top:1%;
+    word-wrap:break-word;
+    border:1px solid rgba(0,0,0,.125);
+    border-radius:.5rem
+}
+.card h4{
+    text-align:center;
+}
+.container h3{
+    text-align:center;
+    background-color:white;
+}
+#container{
+    background-color:white;
+    padding-bottom:2%;
+}
+#container button{
+    margin-left:25%;
+    width:50%;
+}
+.col-lg-4{
+    width:33.3%;
+    height:360px;
+}
 
-    .ShowAddr{
-        width: 500px; 
-        margin: 50 auto; 
-    }
-    .card-img img{
-        width: 100%;
-        height:40%;
+.ShowAddr{
+    width: 500px; 
+    margin: 50 auto; 
+}
+.card-img img{
+    width: 100%;
 
-    }
-    table{
-        table-layout: auto;
-        width:100%;  
-        text-align:center;
-    }
+}
+table{
+    table-layout: auto;
+    width:100%;  
+    text-align:center;
+}
 
-    th,td {
-        border: 1px solid black;
-        width:5%;
-    }
-    td img{
-        width:100px;
-        height: 60px;
-    }
+th,td {
+    border: 1px solid black;
+    width:5%;
+    text-align: center;
+    padding: 10px;
+}
+td img{
+    height:80px;
+}
 
-    textarea {
-     resize: none;
- }
+textarea {
+    resize: none;
+}
 
- /* but dont work responesive */
- .modal-dialog,
- .modal-content {
+/* but dont work responesive */
+.modal-dialog,
+.modal-content {
     /* 80% of window height */
     height: 95%;
 }
@@ -119,3 +119,30 @@ body{
 .col-lg-8 img{
     width:100%;
 }
+
+
+.form-group img{
+    width:40%;
+}
+.form-group{
+    margin-left:15%;
+}
+col-lg-1{
+    padding: 100px;
+}
+
+#stick-form-edit{
+    position: fixed;
+    width: 30%;
+    height: 200px;
+    z-index: 15;
+    top: 50%;
+    left: 50%;
+    margin: -100px 0 0 -150px;
+}
+
+.card img{
+    width:100%;
+}
+
+

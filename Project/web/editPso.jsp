@@ -28,7 +28,7 @@
                 P_ID : ${param.pso_id}<br>
                 color_id : ${param.p_id}<br>
                 pso_id : ${param.product_color_id}<br>
-                Image : ${e_selected.iamge}<img src="${e_selected.iamge}" style="width: 200px"><br>
+                Image : <img src="${e_selected.image}" style="width: 200px"><br>
                 quantity : <input type="text" name="quantity" value="${e_selected.quantity}" size="10" /><br>
                 <sql:query var="selectedSize" dataSource="shoppingonline">
                     select * from size 

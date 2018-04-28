@@ -8,10 +8,10 @@
         
         <sql:query dataSource="shoppingonline" var="addrxmember">
             SELECT * 
-            FROM member
+            FROM member 
             LEFT OUTER JOIN member_address
-            USING(username)
-            WHERE username = '${sessionScope.username}'
+            on (member.username = member_address.username)
+            WHERE member.username = '${sessionScope.username}'
         </sql:query>
         <c:set var="count" value="3"></c:set>
             <div class="container">

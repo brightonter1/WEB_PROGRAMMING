@@ -7,8 +7,12 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -16,13 +20,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Cart;
+import model.User;
+import org.apache.derby.client.am.DateTime;
+import org.apache.derby.client.am.DateTimeValue;
+import org.apache.tomcat.jni.Time;
 
 /**
  *
  * @author Brightonter
  */
-@WebServlet(urlPatterns = {"/EditPsoServlet"})
-public class EditPsoServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/BuyOrderItenServlet"})
+public class BuyOrderItenServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,56 +44,42 @@ public class EditPsoServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, InterruptedException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
+            HttpSession session = request.getSession(true);
+            User u = (User) session.getAttribute("user");
+            String text = request.getParameter("cartId");
+            out.print(text);
+            String[] temp = text.split(",");
+            out.print("EIEI");
+//            out.print( + "|" + LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_TIME));
+//            
             Connection con = (Connection) getServletContext().getAttribute("Connection");
-            
-            
-            
-            String price = request.getParameter("price");
-            String quantity = request.getParameter("quantity");
-            String size = request.getParameter("size");
-            String p_id = request.getParameter("p_id");
-            String pso_id = request.getParameter("pso_id");
-            String product_color_id = request.getParameter("product_color_id");
-            out.print(price + "<br>");
-            out.print(quantity + "<br>");
-            out.print(size + "<br>");
-            out.print(p_id + "<br>");
-            out.print(pso_id + "<br>");
-            out.print(product_color_id + "<br>");
-            
-            String SQL = "UPDATE pso "
-                    + "SET price = ?, quantity = ?, size = ? "
-                    + "where p_id = ? and product_color_id = ? and pso_id = ?";
-            
-
-            
+//
+            String SQL = "UPDATE cart SET order_date = ?, total_price = ?, payment_status = 'transfer' where username = ? and cart_id = ?";
             PreparedStatement ppstm = con.prepareStatement(SQL);
-            out.print("complete1");
-            ppstm.setFloat(1, Float.parseFloat(price));
-            out.print("complete2");
-            ppstm.setInt(2, Integer.parseInt(quantity));
-            out.print("complete3");
-            ppstm.setString(3, size);
-            out.print("complete4");
-            ppstm.setString(4, p_id);
-            out.print("complete5");
-            ppstm.setString(5, product_color_id);
-            out.print("complete6");
-            ppstm.setString(6, pso_id);
-            out.print("complete7");
+            ppstm.setDate(1, Date.valueOf(LocalDate.now()));
+            ppstm.setString(2, temp[1]);
+            ppstm.setString(3, u.getUsername());
+            ppstm.setString(4, temp[0]);
             ppstm.executeUpdate();
-            out.print("complete7");
-            Thread.sleep(800);
-            response.sendRedirect("viewAllProducts.jsp");
-            
+            out.print("EIEI");
+
+            SQL = "INSERT INTO payment (cart_payment_cart_id) VALUES (?)";
+            ppstm = con.prepareStatement(SQL);
+            ppstm.setString(1, temp[0]);
+            ppstm.executeUpdate();
+            Cart c = new Cart();
+            c.setCart_id(Integer.parseInt(temp[0]));
+            session.setAttribute("cart", c);
+            response.sendRedirect("home.jsp");
+
         } catch (SQLException ex) {
-            Logger.getLogger(EditPsoServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+            Logger.getLogger(BuyOrderItenServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -98,11 +94,7 @@ public class EditPsoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(EditPsoServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -116,11 +108,7 @@ public class EditPsoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(EditPsoServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

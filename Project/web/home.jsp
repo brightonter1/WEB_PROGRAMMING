@@ -11,9 +11,7 @@
 
     </head>
     <body>
-        <sql:query var="category" dataSource="shoppingonline">
-            select * from category
-        </sql:query>
+
         <%@include file="header.jsp" %>
         <form action="home.jsp" method="POST">
 
@@ -22,11 +20,12 @@
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             GENDER : 
-                            <select class="form-control" name="selectedCategory">
+                            <sql:query var="e_sex" dataSource="shoppingonline" >
+                                select * from sex
+                            </sql:query>
+                            <select class="form-control" name="selectedGender">
                                 GENDER : 
-                                <sql:query var="e_sex" dataSource="shoppingonline" >
-                                    select * from sex
-                                </sql:query>
+
                                 <option value="all">all</option>
                                 <c:forEach var="e_c" items="${e_sex.rows}">
                                     <option value="${e_c.sex}">${e_c.sex}</option>
@@ -34,6 +33,9 @@
                             </select>
                         </li>
                         <li class="nav-item">
+                            <sql:query var="category" dataSource="shoppingonline">
+                                select * from category
+                            </sql:query>
                             <select class="form-control" name="selectedCategory">
                                 <option value="all">all</option>
                                 <c:forEach var="e_c" items="${category.rows}">
@@ -49,7 +51,7 @@
                             </select>
                         </li>
                         <li>
-                            <input type="submit" value="submit" name="button" />
+                            <input type="submit" value="submit" name="button" class="btn btn-primary"/>
                         </li>
                     </ul>
                 </nav>
@@ -66,10 +68,23 @@
         <c:if test="${param.button == 'submit'}">
 
 
-            <c:if test="${param.selectedCategory == 'all'}"></c:if>
+            <c:if test="${param.selectedCategory == 'all'}">
+
+                <c:if test="${param.selectedGender == 'all'}"></c:if>
+                <c:if test="${param.selectedGender != 'all'}">
+                    where sex = '${param.selectedGender}'
+                </c:if>
+
+            </c:if>
             <c:if test="${param.selectedCategory != 'all'}">
                 where cate_type = '${param.selectedCategory}'
+                <c:if test="${param.selectedGender == 'all'}"></c:if>
+                <c:if test="${param.selectedGender != 'all'}">
+                    and sex = '${param.selectedGender}'
+                </c:if>
             </c:if>
+
+
 
 
         </c:if>
@@ -103,6 +118,12 @@
                                 <input name="quantity" value="0" style="display:none;">
                                 <button type="submit" class="btn btn-default" >View</button><br>
                             </form>
+                            <form action="addFavServlet" method="POST">
+                                <input name="p_id" value="${i.p_id}" style="display:none;">
+                                <input name="product_color_id" value="${i.product_color_id}" style="display:none;">
+                                <input name="quantity" value="0" style="display:none;">
+                                <button type="submit" class="btn btn-default" >Add Fav</button><br>
+                            </form>   
                         </div>
                     </div>
                 </div>
